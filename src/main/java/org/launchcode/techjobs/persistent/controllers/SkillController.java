@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("skills//")
+@RequestMapping("skills")
 public class SkillController {
 
     @Autowired
