@@ -3,26 +3,29 @@ package org.launchcode.techjobs.persistent.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
+//extend job to abstract entity and replaced the ype of field employer to be Employer and refactored getter and setters
+//add Many to one to field Employer
 @Entity
 public class Job extends AbstractEntity {
 
     @ManyToOne
-    @JoinColumn(name = "employer_id")
     private Employer employer;
-
-
 
     @ManyToMany
     private List<Skill> skills;
 
 
+
     public Job() {
+
     }
 
     // Initialize the id and value fields.
-    public Job(Employer anEmployer, List<Skill> someSkills) {
+
+    public Job(Employer anEmployer, List someSkills) {
         super();
         this.employer = anEmployer;
         this.skills = someSkills;
@@ -46,5 +49,4 @@ public class Job extends AbstractEntity {
     public void setSkills(List<Skill> skills) {
         this.skills = skills;
     }
-
 }

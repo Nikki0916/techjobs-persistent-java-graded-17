@@ -1,5 +1,6 @@
 package org.launchcode.techjobs.persistent.models;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -8,22 +9,33 @@ import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
+// added private jobs type of List<Jobs> and intizalize into empty arrary list
 @Entity
 public class Employer extends AbstractEntity {
 
-
-    @NotBlank(message = "Location is required")
-    @Size(max = 100, message = "Location must be less than or equal to 100 characters")
-    private String location;
-
-
-
-    @JoinColumn (name = "employer_id")
+//    Use oneto many and join column to declare relationship between data tables
     @OneToMany
-    private List<Job> jobs = new ArrayList<>();
+    @JoinColumn(name = "employer_id")
+    private final List<Job> jobs = new ArrayList<>();
+
+    @NotBlank
+    @Size(max=100)
+    public String location;
+
+    public Employer(String location) {
+        this.location = location;
+    }
+
     public Employer() {}
+
+    public List<Job> getJobs() {
+        return jobs;
+    }
+
+//    public void setJobs(List<Job> jobs) {
+//        this.jobs = jobs;
+//    }
+
     public String getLocation() {
         return location;
     }
@@ -31,12 +43,6 @@ public class Employer extends AbstractEntity {
     public void setLocation(String location) {
         this.location = location;
     }
-
-    public List<Job> getJobs() {
-        return jobs;
-    }
-
-    public void setJobs(List<Job> jobs) {
-        this.jobs = jobs;
-    }
 }
+
+

@@ -9,15 +9,19 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
+
 @MappedSuperclass
 public abstract class AbstractEntity {
-@Id
-@GeneratedValue
-
+//Set up Abstract Entity with Mapped Super class
+//Added ID and Generated Value
+//
+//Added not blank and size to ensure input requirements are met
+    @Id
+    @GeneratedValue
     private int id;
 
     @NotBlank(message = "Name is required")
-    @Size(max = 100, message = "Name must be less than or equal to 100 characters")
+    @Size(max=100)
     private String name;
 
     public int getId() {

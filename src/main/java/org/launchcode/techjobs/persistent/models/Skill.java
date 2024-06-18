@@ -1,33 +1,34 @@
+//
+
 package org.launchcode.techjobs.persistent.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Skill extends AbstractEntity {
-
-    @Size(max = 500, message = "Description must be less than or equal to 500 characters")
-    private String description;
-
-@ManyToMany(mappedBy = "skills")
+//added jobs field with many to many annotation and the argument and updated job model
+    @ManyToMany(mappedBy="skills")
     private List<Job> jobs = new ArrayList<>();
-    public List<Job> getJobs() {
+
+    public String description;
+
+    public Skill(String description) {
+        this.description = description;
+    }
+
+    public Skill() {}
+
+
+    public List getJobs() {
         return jobs;
     }
 
-    public void setJobs(List<Job> jobs) {
+    public void setJobs(List jobs) {
         this.jobs = jobs;
-    }
-
-
-
-    // No-arg constructor required by Hibernate
-    public Skill() {
     }
 
     public String getDescription() {
@@ -36,6 +37,7 @@ public class Skill extends AbstractEntity {
 
     public void setDescription(String description) {
         this.description = description;
-
     }
+
+
 }

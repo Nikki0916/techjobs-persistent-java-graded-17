@@ -1,3 +1,5 @@
+//
+
 package org.launchcode.techjobs.persistent.models;
 
 import java.util.ArrayList;
@@ -87,4 +89,3 @@ public class JobData {
 
 
 }
-

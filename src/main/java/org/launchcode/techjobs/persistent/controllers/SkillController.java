@@ -1,6 +1,6 @@
 package org.launchcode.techjobs.persistent.controllers;
+
 import jakarta.validation.Valid;
-import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.Skill;
 import org.launchcode.techjobs.persistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.Optional;
 
+//added skill controller with these methods index, displayAddSkillForm, processAddSkillForm, and displayViewSkill
 @Controller
 @RequestMapping("skills")
 public class SkillController {
@@ -32,24 +32,27 @@ public class SkillController {
     }
 
     @PostMapping("add")
-    public String processAddSkillForm(@ModelAttribute @Valid Skill newSkill,
-                                      Errors errors, Model model) {
+    public String processAddSkillForm(@ModelAttribute @Valid Skill newSkill, Errors errors, Model model) {
+
         if (errors.hasErrors()) {
             return "skills/add";
         }
         skillRepository.save(newSkill);
         return "redirect:";
+
     }
 
-    @GetMapping("view/{skillId}")
+    @GetMapping("view/{employerId}")
     public String displayViewSkill(Model model, @PathVariable int skillId) {
-        Optional<Skill> optSkill = skillRepository.findById(skillId);
-        if (optSkill.isPresent()) {
-            Skill skill = optSkill.get();
+
+        Optional optEmployer = skillRepository.findById(skillId);
+        if (optEmployer.isPresent()) {
+            Skill skill = (Skill) optEmployer.get();
             model.addAttribute("skill", skill);
             return "skills/view";
         } else {
             return "redirect:../";
         }
+
     }
 }
